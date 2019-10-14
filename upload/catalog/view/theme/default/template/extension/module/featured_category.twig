@@ -1,0 +1,43 @@
+<h3>{{ heading_title }}</h3>
+<div class="row">
+  {% if column_count == 1 %}
+    {% set column_class = 'col-sm-12' %}
+  {% elseif column_count == 2 %}
+    {% set column_class = 'col-sm-6' %}     
+  {% elseif column_count == 3 %}
+    {% set column_class = 'col-sm-4' %}     
+  {% elseif column_count == 4 %}
+    {% set column_class = 'col-sm-3' %}
+  {% elseif column_count == 5 or column_count == 6 %}
+    {% set column_class = 'col-sm-2' %}     
+  {% elseif column_count > 6 %}
+    {% set column_class = 'col-sm-1' %}     
+  {% endif %}
+  {#
+    {% for category in categories|batch((categories|length / column_count)|round(1, 'ceil')) %}
+        <div class="{{ column_class }}">
+          <ul>
+            {% for child in category %}
+            <li class="category-icon"><a href="{{ child.href }}">
+                    {% if child.thumb %}
+                        <img src="{{ child.thumb }}" alt="{{ child.name }}" title="{{ child.name }}" class="img-thumbnail" />
+                        <br>
+                    {% endif %}
+                    {{ child.name }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+    {% endfor %}
+  #}
+    {% for category in categories %}
+    <div class="{{ column_class }}">
+            <a href="{{ category.href }}">
+            {% if category.thumb %}
+                <img src="{{ category.thumb }}" alt="{{ category.name }}" title="{{ category.name }}" class="img-thumbnail" />
+                <br>
+            {% endif %}
+            {{ category.name }}
+            </a>
+    </div>
+    {% endfor %}
+</div>
