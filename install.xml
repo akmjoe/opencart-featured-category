@@ -5,4 +5,20 @@
 	<author>Joe Rothrock</author>
 	<link>https://github.com/akmjoe</link>
 	<code>opencart-featured-category</code>
+    <file path="admin/view/template/extension/module/featured_category.twig">
+        <operation error="skip" info="To allow moving categories">
+            <search><![CDATA[<div id="featured-category{{ category.category_id }}">]]></search>
+            <add position="after"><![CDATA[<i class="fa fa-arrow-down"></i><i class="fa fa-arrow-up"></i>]]></add>
+        </operation>
+        <operation error="skip" info="Javascript to allow moving categories">
+            <search><![CDATA[<script type="text/javascript"><!--]]></search>
+            <add position="after"><![CDATA[$('#featured-category').delegate('.fa-arrow-down', 'click', function() {
+	$(this).parent().insertAfter($(this).parent().next());
+});
+$('#featured-category').delegate('.fa-arrow-up', 'click', function() {
+	$(this).parent().insertBefore($(this).parent().prev());
+});
+]]></add>
+        </operation>
+    </file>
 </modification>
